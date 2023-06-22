@@ -100,8 +100,13 @@
                                 ?>
                             </form>
                         </li>
-                        <li>
-                            <a href="signedup.php" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign up</a>
+                        <li> 
+                            <?php
+                                if (!isset($_COOKIE['name'])) {
+                            echo '<a href="signedup.php" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign up</a>';
+
+                                }
+                                ?>
                         </li>
                     </ul>
                 </div>
@@ -163,20 +168,20 @@
                     $sql = "select * from $dbname.userdetails";
                     $result = $conn->query($sql);
                     while ($row = $result->fetch_assoc()) {
-                        echo '<tr class="bg-gray-50 dark:bg-gray-700 text-gray-700 dark:text-gray-400">';
+                        echo '<tr class="bg-gray-50 dark:bg-gray-700 text-gray-700 dark:text-gray-400 ">';
                         echo '<td class="px-6 py-4">' . $row['name'] . '</td>';
                         echo '<td class="px-6 py-4">' . $row['email'] . '</td>';
                         echo '<td class="px-6 py-4">' . $row['gender'] . '</td>';
                         echo '<td class="px-6 py-4">' . $row['state'] . '</td>';
                         echo '<td class="px-6 py-4">' . $row['address'] . '</td>';
-                        echo '<td class="px-6 py-4">
-                                <a href=' . "editdata.php?id=" . $row['id'] . ' class="text-blue-600 hover:text-blue-900">Edit</a>                            
-                                <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="relative text-blue-600 hover:text-blue-900 ml-2" type="button">Delete</button>
+                        echo '<td class="px-6 py-6 mt-1 flex justify-center h-full">
+                                <a href=' . "editdata.php?id=" . $row['id'] . ' class="dark:text-gray-400 font-semibold hover:dark:text-green-600">Edit</a>                            
+                                <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="relative font-semibold dark:text-gray-400 hover:text-red-600 ml-2" type="button">Delete</button>
                                 <!-- Dropdown menu -->
                                     <div id="dropdown" class="hidden text-white bg-red-800 hover:bg-red-900 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-1.5 mr-2 text-center inline-flex items-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
                                     <a href=' . "deletedata.php?id=" . $row['id'] . ' class="text-gray-50 hover:text-gray-200">Are you Sure</a>
                                 </div>
-                                <a href=' . "addphoto.php?id=" . $row['id'] . ' class="text-blue-600 ml-2 hover:text-blue-900">Add photo</a>
+                                <a href=' . "addphoto.php?id=" . $row['id'] . ' class="dark:text-gray-400 ml-2 font-semibold hover:dark:text-green-600">Add photo</a>
                               </td>';
                         echo '<td class="px-6 py-4 text-center">
                               <div class="relative">

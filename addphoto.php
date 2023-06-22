@@ -32,16 +32,16 @@
 </head>
 
 <body>
-<?php 
-        if(!isset($_COOKIE['name'])){
-            setcookie('notlogin', 'OK', time()+2, '/');
-            header('location:index.php');
-            exit();
-        }
+    <?php
+    if (!isset($_COOKIE['name'])) {
+        setcookie('notlogin', 'OK', time() + 2, '/');
+        header('location:index.php');
+        exit();
+    }
 
-        setcookie('photoid', $_GET['id'], time()+300, '/');
+    setcookie('photoid', $_GET['id'], time() + 300, '/');
     ?>
-<nav>
+    <nav>
         <div class="realtive w-full h-12 bg-slate-500">
             <span class='absolute left-5 top-2 text-white text-2xl'>CRUD</span>
             <div class="flex justify-end items-center h-full pr-4">
@@ -52,13 +52,12 @@
                         include('conn.php');
                         $name = $_COOKIE['name'];
                         $sql = "select * from $dbname.users where name='$name'";
-                        
+
                         $result = $conn->query($sql);
                         $row = $result->fetch_assoc();
                         $imagepath = $row['imagepath'];
-                        echo '<img class="w-10 h-10 mr-2 rounded-full" src="./uploads/'.$imagepath.'" alt="user photo">';
-                    }
-                    else{
+                        echo '<img class="w-10 h-10 mr-2 rounded-full" src="./uploads/' . $imagepath . '" alt="user photo">';
+                    } else {
                         echo '<img class="w-10 h-10 mr-2 rounded-full" src="./images/27470334_7309681.jpg" alt="user photo">';
                     }
 
@@ -120,19 +119,16 @@
         <form class="w-1/2 text-slate-950" action="addingphoto.php" method="POST" enctype="multipart/form-data">
 
             <div class="mb-4">
-                <input
-                    class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                    id="file_input" name='files' type="file">
+                <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" name='files' type="file">
 
             </div>
             <div class="w-full flex justify-center ">
-                <button type="submit"
-                    class="text-white mt-5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-10 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Update</button>
+                <button type="submit" class="text-white mt-5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-10 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Update</button>
             </div>
         </form>
 
     </div>
-                    
+
 </body>
 
 </html>

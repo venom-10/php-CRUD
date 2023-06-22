@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+    <input type="file" id="image-upload" />
+<img id="image-preview" />
+<button id="crop-image">Crop Image</button>
+
+<script>
+    $(document).ready(function() {
+  // Initialize the image cropper
+  var cropper = new Croppie('#image-preview', {
+    enableExif: true,
+    viewport: {
+      width: 200,
+      height: 200,
+      type: 'square'
+    },
+    boundary: {
+      width: 300,
+      height: 300
+    }
+  });
+
+  // Handle the image upload
+  $('#image-upload').on('change', function() {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      cropper.bind(e.target.result);
+    };
+    reader.readAsDataURL(this.files[0]);
+  });
+
+  // Handle the crop image button click
+  $('#crop-image').on('click', function() {
+    var croppedImage = cropper.getCroppedImageData();
+    // Do something with the cropped image data, such as saving it to the server
+  });
+});
+
+</script>
+</body>
+</html>
